@@ -1,10 +1,10 @@
 # Agave Repo Function Tester
 
-This is a demonstration of how to extract and test specific functions or code snippets from the Anza Agave repository without building the entire project. This approach allows for focused testing and experimentation with individual components.
+This is a demonstration of how to extract and test specific functions or code snippets from the Anza Agave repository without building the entire project. This approach allows for quick testing and experimentation with individual components with minimum dependencies to deal with.
 
 ## Project Context
 
-This project is part of the Turbin3 Advanced SVM cohort (Q1 2025) activity, aimed at improving developer skills in working with complex blockchain codebases such as Validator clients 
+This project is part of the [Turbin3](https://turbin3.com) Advanced SVM cohort (Q1 2025) activity, aimed at improving developer skills in working with complex blockchain codebases such as Validator clients. 
 
 ## Getting Started
 
