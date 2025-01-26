@@ -4,7 +4,7 @@ This is a demonstration of how to extract and test specific functions or code sn
 
 ## Project Context
 
-This project is part of the [Turbin3](https://turbin3.com) Advanced SVM cohort (Q1 2025) activity, aimed at improving developer skills in working with complex blockchain codebases such as Validator clients. 
+[Turbin3](https://turbin3.com) Advanced SVM cohort (Q1 2025) project to deep dive into Solana Validator clients. 
 
 ## Getting Started
 
