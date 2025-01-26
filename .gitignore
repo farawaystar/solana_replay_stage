@@ -3,3 +3,4 @@
 /benches
 Cargo.toml
 Cargo.lock
+.DS_Store

@@ -20,11 +20,16 @@ Follow these steps to set up and use this testing environment:
    - From this repo: `src/replay_stage_test.rs`
    - To Agave: `agave/core/src/replay_stage_test.rs`
 
-3. Identify the package name:
+3. Add to lib.rs
+   ```
+   pub mod replay_stage_test;
+   ```
+
+4. Identify the package name:
    - Open `agave/core/Cargo.toml`
    - Look for the `package.name` field (e.g., "solana-core")
 
-4. Build the specific package:
+5. Build the specific package:
    ```
    cargo build -p solana-core
    ```
