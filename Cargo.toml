@@ -1,0 +1,402 @@
+[package]
+name = "solana-core"
+description = "Blockchain, Rebuilt for Scale"
+documentation = "https://docs.rs/solana-core"
+readme = "../README.md"
+version =  "2.2.0"
+authors = ["farawaystar <farawaystar>"]
+license = "Apache-2.0"
+edition = "2021"
+
+[badges]
+codecov = { repository = "solana-labs/solana", branch = "master", service = "github" }
+
+[dependencies]
+agave-banking-stage-ingress-types = { workspace = true }
+ahash = { workspace = true }
+anyhow = { workspace = true }
+arrayvec = { workspace = true }
+assert_matches = { workspace = true }
+base64 = { workspace = true }
+bincode = { workspace = true }
+bs58 = { workspace = true }
+bytes = { workspace = true }
+chrono = { workspace = true, features = ["default", "serde"] }
+crossbeam-channel = { workspace = true }
+dashmap = { workspace = true, features = ["rayon", "raw-api"] }
+etcd-client = { workspace = true, features = ["tls"] }
+futures = { workspace = true }
+histogram = { workspace = true }
+itertools = { workspace = true }
+lazy_static = { workspace = true }
+log = { workspace = true }
+lru = { workspace = true }
+min-max-heap = { workspace = true }
+num_enum = { workspace = true }
+prio-graph = { workspace = true }
+qualifier_attr = { workspace = true }
+quinn = { workspace = true }
+rand = { workspace = true }
+rand_chacha = { workspace = true }
+rayon = { workspace = true }
+rolling-file = { workspace = true }
+rustls = { workspace = true }
+serde = { workspace = true }
+serde_bytes = { workspace = true }
+serde_derive = { workspace = true }
+slab = { workspace = true }
+solana-accounts-db = { workspace = true }
+solana-bloom = { workspace = true }
+solana-builtins-default-costs = { workspace = true }
+solana-client = { workspace = true }
+solana-compute-budget = { workspace = true }
+solana-compute-budget-instruction = { workspace = true }
+solana-connection-cache = { workspace = true }
+solana-cost-model = { workspace = true }
+solana-entry = { workspace = true }
+solana-feature-set = { workspace = true }
+solana-fee = { workspace = true }
+solana-frozen-abi = { workspace = true, optional = true, features = [
+    "frozen-abi",
+] }
+solana-frozen-abi-macro = { workspace = true, optional = true, features = [
+    "frozen-abi",
+] }
+solana-geyser-plugin-manager = { workspace = true }
+solana-gossip = { workspace = true }
+solana-ledger = { workspace = true }
+solana-measure = { workspace = true }
+solana-metrics = { workspace = true }
+solana-net-utils = { workspace = true }
+solana-perf = { workspace = true }
+solana-poh = { workspace = true }
+solana-pubkey = { workspace = true }
+solana-quic-client = { workspace = true }
+solana-rayon-threadlimit = { workspace = true }
+solana-rpc = { workspace = true }
+solana-rpc-client-api = { workspace = true }
+solana-runtime = { workspace = true }
+solana-runtime-transaction = { workspace = true }
+solana-sanitize = { workspace = true }
+solana-sdk = { workspace = true }
+solana-sdk-ids = { workspace = true }
+solana-send-transaction-service = { workspace = true }
+solana-short-vec = { workspace = true }
+solana-streamer = { workspace = true }
+solana-svm = { workspace = true }
+solana-svm-transaction = { workspace = true }
+solana-timings = { workspace = true }
+solana-tls-utils = { workspace = true }
+solana-tpu-client = { workspace = true }
+solana-transaction-status = { workspace = true }
+solana-turbine = { workspace = true }
+solana-unified-scheduler-pool = { workspace = true }
+solana-version = { workspace = true }
+solana-vote = { workspace = true }
+solana-vote-program = { workspace = true }
+solana-wen-restart = { workspace = true }
+strum = { workspace = true, features = ["derive"] }
+strum_macros = { workspace = true }
+sys-info = { workspace = true }
+tempfile = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true, features = ["full"] }
+trees = { workspace = true }
+
+[dev-dependencies]
+assert_matches = { workspace = true }
+fs_extra = { workspace = true }
+serde_json = { workspace = true }
+serial_test = { workspace = true }
+# See order-crates-for-publishing.py for using this unusual `path = "."`
+solana-address-lookup-table-program = { workspace = true }
+solana-compute-budget-program = { workspace = true }
+solana-core = { path = ".", features = ["dev-context-only-utils"] }
+solana-cost-model = { workspace = true, features = ["dev-context-only-utils"] }
+solana-ledger = { workspace = true, features = ["dev-context-only-utils"] }
+solana-logger = { workspace = true }
+solana-net-utils = { workspace = true, features = ["dev-context-only-utils"] }
+solana-poh = { workspace = true, features = ["dev-context-only-utils"] }
+solana-program-runtime = { workspace = true, features = ["metrics"] }
+solana-sdk = { workspace = true, features = ["dev-context-only-utils"] }
+solana-stake-program = { workspace = true }
+solana-system-program = { workspace = true }
+solana-unified-scheduler-logic = { workspace = true }
+solana-unified-scheduler-pool = { workspace = true, features = [
+    "dev-context-only-utils",
+] }
+solana-vote = { workspace = true, features = ["dev-context-only-utils"] }
+spl-memo = { workspace = true, features = ["no-entrypoint"] }
+static_assertions = { workspace = true }
+systemstat = { workspace = true }
+test-case = { workspace = true }
+
+[target."cfg(unix)".dependencies]
+sysctl = { workspace = true }
+
+[features]
+dev-context-only-utils = [
+    "solana-perf/dev-context-only-utils",
+    "solana-runtime/dev-context-only-utils",
+    "solana-streamer/dev-context-only-utils",
+]
+frozen-abi = [
+    "dep:solana-frozen-abi",
+    "dep:solana-frozen-abi-macro",
+    "solana-accounts-db/frozen-abi",
+    "solana-bloom/frozen-abi",
+    "solana-compute-budget/frozen-abi",
+    "solana-cost-model/frozen-abi",
+    "solana-gossip/frozen-abi",
+    "solana-ledger/frozen-abi",
+    "solana-perf/frozen-abi",
+    "solana-program-runtime/frozen-abi",
+    "solana-runtime/frozen-abi",
+    "solana-sdk/frozen-abi",
+    "solana-short-vec/frozen-abi",
+    "solana-svm/frozen-abi",
+    "solana-vote/frozen-abi",
+    "solana-vote-program/frozen-abi",
+]
+
+[[bench]]
+name = "replay_stage_test"
+
+[[bench]]
+name = "gen_keys"
+
+[[bench]]
+name = "sigverify_stage"
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[lints]
+workspace = true
+
+[workspace]
+members = [
+    "account-decoder",
+    "account-decoder-client-types",
+    "accounts-bench",
+    "accounts-cluster-bench",
+    "accounts-db",
+    "accounts-db/accounts-hash-cache-tool",
+    "accounts-db/store-histogram",
+    "accounts-db/store-tool",
+    "banking-bench",
+    "banking-stage-ingress-types",
+    "banks-client",
+    "banks-interface",
+    "banks-server",
+    "bench-streamer",
+    "bench-tps",
+    "bench-vote",
+    "bloom",
+    "bucket_map",
+    "builtins",
+    "builtins-default-costs",
+    "cargo-registry",
+    "clap-utils",
+    "clap-v3-utils",
+    "cli",
+    "cli-config",
+    "cli-output",
+    "client",
+    "client-test",
+    "compute-budget",
+    "compute-budget-instruction",
+    "connection-cache",
+    "core",
+    "cost-model",
+    "curves/*",
+    "dos",
+    "download-utils",
+    "entry",
+    "faucet",
+    "fee",
+    "genesis",
+    "genesis-utils",
+    "geyser-plugin-interface",
+    "geyser-plugin-manager",
+    "gossip",
+    "inline-spl",
+    "install",
+    "keygen",
+    "lattice-hash",
+    "ledger",
+    "ledger-tool",
+    "local-cluster",
+    "log-analyzer",
+    "log-collector",
+    "measure",
+    "memory-management",
+    "merkle-root-bench",
+    "merkle-tree",
+    "metrics",
+    "net-shaper",
+    "net-utils",
+    "notifier",
+    "perf",
+    "poh",
+    "poh-bench",
+    "poseidon",
+    "program-runtime",
+    "program-test",
+    "programs/address-lookup-table",
+    "programs/address-lookup-table-tests",
+    "programs/bpf-loader-tests",
+    "programs/bpf_loader",
+    "programs/bpf_loader/gen-syscall-list",
+    "programs/compute-budget",
+    "programs/compute-budget-bench",
+    "programs/config",
+    "programs/ed25519-tests",
+    "programs/loader-v4",
+    "programs/stake",
+    "programs/stake-tests",
+    "programs/system",
+    "programs/vote",
+    "programs/zk-elgamal-proof",
+    "programs/zk-token-proof",
+    "programs/zk-token-proof-tests",
+    "pubsub-client",
+    "quic-client",
+    "rayon-threadlimit",
+    "rbpf-cli",
+    "remote-wallet",
+    "rpc",
+    "rpc-client",
+    "rpc-client-api",
+    "rpc-client-nonce-utils",
+    "rpc-test",
+    "runtime",
+    "runtime-transaction",
+    "sdk",
+    "sdk/account",
+    "sdk/account-info",
+    "sdk/atomic-u64",
+    "sdk/bincode",
+    "sdk/borsh",
+    "sdk/cargo-build-sbf",
+    "sdk/cargo-test-sbf",
+    "sdk/client-traits",
+    "sdk/clock",
+    "sdk/cluster-type",
+    "sdk/commitment-config",
+    "sdk/compute-budget-interface",
+    "sdk/cpi",
+    "sdk/decode-error",
+    "sdk/define-syscall",
+    "sdk/derivation-path",
+    "sdk/ed25519-program",
+    "sdk/epoch-info",
+    "sdk/epoch-rewards",
+    "sdk/epoch-rewards-hasher",
+    "sdk/epoch-schedule",
+    "sdk/feature-gate-interface",
+    "sdk/feature-set",
+    "sdk/fee-calculator",
+    "sdk/fee-structure",
+    "sdk/file-download",
+    "sdk/frozen-abi",
+    "sdk/frozen-abi/macro",
+    "sdk/gen-headers",
+    "sdk/hard-forks",
+    "sdk/hash",
+    "sdk/inflation",
+    "sdk/instruction",
+    "sdk/instructions-sysvar",
+    "sdk/keccak-hasher",
+    "sdk/keypair",
+    "sdk/logger",
+    "sdk/macro",
+    "sdk/message",
+    "sdk/msg",
+    "sdk/native-token",
+    "sdk/nonce",
+    "sdk/nonce-account",
+    "sdk/offchain-message",
+    "sdk/package-metadata",
+    "sdk/package-metadata-macro",
+    "sdk/packet",
+    "sdk/poh-config",
+    "sdk/precompile-error",
+    "sdk/precompiles",
+    "sdk/presigner",
+    "sdk/program",
+    "sdk/program-entrypoint",
+    "sdk/program-error",
+    "sdk/program-memory",
+    "sdk/program-option",
+    "sdk/program-pack",
+    "sdk/pubkey",
+    "sdk/quic-definitions",
+    "sdk/rent",
+    "sdk/rent-debits",
+    "sdk/reserved-account-keys",
+    "sdk/reward-info",
+    "sdk/sanitize",
+    "sdk/sdk-ids",
+    "sdk/secp256k1-program",
+    "sdk/secp256r1-program",
+    "sdk/seed-derivable",
+    "sdk/seed-phrase",
+    "sdk/serde",
+    "sdk/serde-varint",
+    "sdk/serialize-utils",
+    "sdk/sha256-hasher",
+    "sdk/short-vec",
+    "sdk/shred-version",
+    "sdk/signature",
+    "sdk/signer",
+    "sdk/slot-hashes",
+    "sdk/slot-history",
+    "sdk/stable-layout",
+    "sdk/system-transaction",
+    "sdk/sysvar",
+    "sdk/sysvar-id",
+    "sdk/time-utils",
+    "sdk/transaction",
+    "sdk/transaction-context",
+    "sdk/transaction-error",
+    "sdk/validator-exit",
+    "send-transaction-service",
+    "stake-accounts",
+    "storage-bigtable",
+    "storage-bigtable/build-proto",
+    "storage-proto",
+    "streamer",
+    "svm",
+    "svm-conformance",
+    "svm-rent-collector",
+    "svm-transaction",
+    "test-validator",
+    "thin-client",
+    "timings",
+    "tls-utils",
+    "tokens",
+    "tps-client",
+    "tpu-client",
+    "tpu-client-next",
+    "transaction-dos",
+    "transaction-metrics-tracker",
+    "transaction-status",
+    "transaction-status-client-types",
+    "transaction-view",
+    "turbine",
+    "type-overrides",
+    "udp-client",
+    "unified-scheduler-logic",
+    "unified-scheduler-pool",
+    "upload-perf",
+    "validator",
+    "version",
+    "vortexor",
+    "vote",
+    "watchtower",
+    "wen-restart",
+    "zk-keygen",
+    "zk-sdk",
+    "zk-token-sdk",
+]

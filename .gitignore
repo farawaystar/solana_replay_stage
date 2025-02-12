@@ -1,6 +1,5 @@
 /target
 /archive
 /benches
-Cargo.toml
 Cargo.lock
 .DS_Store
